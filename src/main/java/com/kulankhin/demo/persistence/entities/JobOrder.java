@@ -35,10 +35,10 @@ public class JobOrder implements Serializable {
     private String contractNumber;
 
     @ManyToOne
-    private Customer customer;
+    private Company customer;
 
     @ManyToOne
-    private Customer mainCustomer;
+    private Company mainCustomer;
 
     @Column(precision = 10, scale = 2)
     private Double totalCostInContract; //TODO: если нет нужды считать цену вместе с копейками, то лучше заменить на Integer
