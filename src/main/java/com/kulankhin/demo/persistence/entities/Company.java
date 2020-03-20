@@ -1,5 +1,6 @@
 package com.kulankhin.demo.persistence.entities;
 
+import com.google.common.base.Objects;
 import com.kulankhin.demo.persistence.enums.LawType;
 import lombok.Data;
 
@@ -19,7 +20,6 @@ public class Company implements Serializable {
     private String title;
 
 
-
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private Set<JobOrder> jobOrders;
 
@@ -30,11 +30,16 @@ public class Company implements Serializable {
     private Director director;
 
     @ManyToOne(optional = false)
-    private City city;
+    private CompanyAddress companyAddress;
+
 
     @Column(nullable = false, length = 30)
     @Enumerated(EnumType.STRING)
     private LawType lawType;
+
+    @Column(nullable = false)
+    private String bankingDetails;
+
 
 
 

@@ -19,7 +19,14 @@ public class City {
     private String title;
 
     @OneToMany
-    private Set<Company> companies;
+    private Set<CompanyAddress> companyAddresses;
+
+
+    @OneToMany
+    private Set<CrewList> crewLists;
+
+    @OneToMany
+    private Set<GeoPoints> geoPoints;
 
     @Override
     public boolean equals(Object o) {
