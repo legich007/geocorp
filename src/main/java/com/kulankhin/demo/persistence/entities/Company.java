@@ -30,7 +30,10 @@ public class Company implements Serializable {
     private Director director;
 
     @ManyToOne(optional = false)
-    private CompanyAddress companyAddress;
+    private CompanyAddress actualAddress;
+
+    @ManyToOne(optional = false)
+    private CompanyAddress legalAddress;
 
 
     @Column(nullable = false, length = 30)

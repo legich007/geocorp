@@ -21,8 +21,11 @@ public class CompanyAddress {
     @ManyToOne(optional = false)
     private City city;
 
-    @OneToMany
+    @OneToMany(mappedBy = "legalAddress")
     private Set<Company> companies;
+
+    @OneToMany(mappedBy = "actualAddress")
+    private Set<Company> companiesAct;
 
     @Column(nullable = false)
     private String address;
