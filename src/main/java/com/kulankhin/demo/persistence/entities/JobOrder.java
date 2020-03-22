@@ -43,7 +43,7 @@ public class JobOrder implements Serializable {
     private Company mainCustomer;
 
     @Column(precision = 10, scale = 2)
-    private Double totalCostInContract; //TODO: если нет нужды считать цену вместе с копейками, то лучше заменить на Integer
+    private Double totalCostInContract;
 
     @ManyToMany
     private Set<Geodesy> geodesies;

@@ -7,8 +7,6 @@ public enum ProjectStatus {
     IN_PROGRESS("В работе"),
     CLOSED("Закрыт");
 
-    //TODO: Заменить на реальные значения
-
     private String value;
 
     ProjectStatus(String value) {

@@ -2,14 +2,12 @@ package com.kulankhin.demo.persistence.entities;
 
 import com.google.common.base.Objects;
 import lombok.Data;
-import sun.util.resources.Bundles;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Data
-
 public class Director {
 
     @Id

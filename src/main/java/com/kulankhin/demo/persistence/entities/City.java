@@ -19,10 +19,6 @@ public class City {
     private String title;
 
     @OneToMany
-    private Set<CompanyAddress> companyAddresses;
-
-
-    @OneToMany
     private Set<CrewList> crewLists;
 
     @OneToMany
