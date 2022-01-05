@@ -1,18 +1,18 @@
 package geocorp.persistence.dto;
 
-import geocorp.persistence.entities.JobPosition;
-import lombok.Data;
+import java.util.Set;
 
-import java.time.LocalDate;
+import geocorp.persistence.entities.Order;
+import geocorp.persistence.entities.Person;
+import geocorp.persistence.entities.Position;
+import lombok.Data;
 
 @Data
 public class EmployeeDto {
     private Long id;
-    private String firstName;
-    private String middleName;
-    private String lastName;
+    private Person person;
     private String email;
     private String phoneNumber;
-    private JobPosition jobPosition;
-    private LocalDate dateOfBirth;
+    private Position position;
+    private Set<Order> order;
 }

@@ -1,33 +1,27 @@
 package geocorp.persistence.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
 @Entity
 @Data
-public class Employee implements Serializable {
+@DiscriminatorValue("1")
+public class Employee extends Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Column(nullable = false, length = 50)
-    private String firstName;
-
-    @Column(length = 50)
-    private String middleName;
-
-    @Column(nullable = false, length = 50)
-    private String lastName;
 
     @Column(nullable = false, length = 50)
     private String email;
@@ -36,9 +30,8 @@ public class Employee implements Serializable {
     private String phoneNumber;
 
     @ManyToOne(optional = false)
-    private JobPosition jobPosition;
+    private Position position;
 
-    @Column(nullable = false)
-    private LocalDate dateOfBirth;
-
+    @OneToMany(mappedBy = "manager")
+    private Set<Order> order;
 }

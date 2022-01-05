@@ -44,8 +44,13 @@ public class EmployeeService {
     }
 
     @Transactional
-    public void create(EmployeeDto employeeDto){
+    public void createOrUpdate(EmployeeDto employeeDto){
         Employee employee = employeeMapperImpl.toEmployee(employeeDto);
         employeeRepository.save(employee);
+    }
+
+    @Transactional
+    public void delete(Long employeeId) {
+        employeeRepository.deleteById(employeeId);
     }
 }

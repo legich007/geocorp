@@ -11,11 +11,11 @@ public enum PaymentType {
     private String value;
 
     PaymentType(String str) {
-      value = str;
+        value = str;
     }
 
     @JsonValue
-    public String getValue(){
+    public String getValue() {
         return value;
     }
 }

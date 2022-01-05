@@ -8,17 +8,14 @@ public enum LawType {
     IP("ИП"),
     INDIVIDUAL("Физическое лицо");
 
-
     private String value;
 
-    LawType(String str){
+    LawType(String str) {
         value = str;
     }
 
     @JsonValue
-    public String getValue(){
+    public String getValue() {
         return value;
     }
-
-
 }

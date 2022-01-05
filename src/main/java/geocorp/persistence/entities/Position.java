@@ -1,27 +1,23 @@
 package geocorp.persistence.entities;
 
-import java.util.Set;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import lombok.Data;
 
 @Entity
 @Data
-public class City {
+public class Position implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
-    @Column
+    @Column(nullable = false, unique = true, length = 30)
     private String title;
-
-    @OneToMany(mappedBy = "city")
-    private Set<Address> addresses;
 }

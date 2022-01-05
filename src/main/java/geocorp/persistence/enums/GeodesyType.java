@@ -8,19 +8,15 @@ public enum GeodesyType {
     GNSS("GNSS"),
     MIXED("Смешанный");
 
-
-
-
     private String value;
 
-    GeodesyType(String value){
+    GeodesyType(String value) {
         this.value = value;
     }
 
     @JsonValue
-    public String getValue (){
+    public String getValue() {
         return value;
     }
-
 
 }

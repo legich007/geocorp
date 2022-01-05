@@ -1,11 +1,18 @@
 package geocorp.persistence.entities;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import geocorp.persistence.enums.LawType;
 import lombok.Data;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Data
@@ -18,22 +25,11 @@ public class Company implements Serializable {
     @Column(nullable = false, length = 100)
     private String title;
 
-
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
-    private Set<JobOrder> jobOrders;
-
-    @OneToMany(mappedBy = "mainCustomer", fetch = FetchType.LAZY)
-    private Set<JobOrder> jobOrdersForMain;
+    @ManyToOne(optional = false)
+    private Address actualAddress;
 
     @ManyToOne(optional = false)
-    private Director director;
-
-    @ManyToOne(optional = false)
-    private CompanyAddress actualAddress;
-
-    @ManyToOne(optional = false)
-    private CompanyAddress legalAddress;
-
+    private Address legalAddress;
 
     @Column(nullable = false, length = 30)
     @Enumerated(EnumType.STRING)
