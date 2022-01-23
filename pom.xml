@@ -16,7 +16,7 @@
     <description>Geodesic ERP</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
         <org.projectlombok.version>1.18.10</org.projectlombok.version>
     </properties>
@@ -53,11 +53,6 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

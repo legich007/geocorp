@@ -1,26 +1,16 @@
 package geocorp.controllers;
 
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import geocorp.persistence.dto.EmployeeDto;
+import geocorp.persistence.entities.Employee;
 import geocorp.services.EmployeeService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+import java.util.List;
+
+@Controller
 @RequestMapping("/employee")
 @Api(value = "Employee controller")
 public class EmployeeController {
@@ -32,37 +22,36 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/all")
-    @ApiOperation(value = "get all employees")
-    public ResponseEntity<Set<EmployeeDto>> getAll() {
-        return new ResponseEntity<>(employeeService.getAll(), HttpStatus.OK);
+    @GetMapping("/list")
+    public String listEmployees(Model theModel) {
+        List<Employee> theEmployees = employeeService.findAll();
+        theModel.addAttribute("employees", theEmployees);
+        return "list-employees";
     }
 
-    @GetMapping
-    public ResponseEntity<EmployeeDto> getOne(@RequestParam String firstName) {
-        return new ResponseEntity<>(employeeService.getOne(firstName), HttpStatus.OK);
+    @PostMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("employeeId") Long theId, Model theModel) {
+        Employee theEmployee = employeeService.findById(theId);
+        theModel.addAttribute("employee", theEmployee);
+        return "employee-form";
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDto> getOne(@PathVariable Long id) {
-        return new ResponseEntity<>(employeeService.getById(id), HttpStatus.OK);
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model theModel) {
+        Employee theEmployee = new Employee();
+        theModel.addAttribute("employee", theEmployee);
+        return "employee-form";
     }
 
-    @PostMapping
-    public ResponseEntity<HttpStatus> createEmployee(@RequestBody EmployeeDto employee) {
-        employeeService.createOrUpdate(employee);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PostMapping("/delete")
+    public String delete(@RequestParam("employeeId") Long theId) {
+        employeeService.delete(theId);
+        return "redirect:/employee/list";
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable Long id) {
-        employeeService.delete(id);
+    @PostMapping("/save")
+    public String saveEmployee(@ModelAttribute("employee") Employee theEmployee) {
+        employeeService.createOrUpdate(theEmployee);
+        return "redirect:/employee/list";
     }
-
-    @PutMapping("/employees/{id}")
-    public ResponseEntity<HttpStatus> updateEmployee(@RequestBody EmployeeDto employee) {
-        employeeService.createOrUpdate(employee);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
 }

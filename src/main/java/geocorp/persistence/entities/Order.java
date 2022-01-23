@@ -29,9 +29,6 @@ public class Order implements Serializable {
     @Column(length = 50)
     private String fullProjectTitle;
 
-    @ManyToOne(optional = false)
-    private Employee manager;
-
     @Column(nullable = false)
     private LocalDate dateOfOrder;
 

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -50,7 +52,22 @@ public class EmployeeService {
     }
 
     @Transactional
+    public void createOrUpdate(Employee employee){
+        employeeRepository.save(employee);
+    }
+
+    @Transactional
     public void delete(Long employeeId) {
         employeeRepository.deleteById(employeeId);
+    }
+
+    public Employee findById(long theId) {
+        return employeeRepository.findById(theId).orElseGet(null);
+    }
+
+    public List<Employee> findAll() {
+        List<Employee> employees = new ArrayList<>();
+        employeeRepository.findAll().forEach(employees::add);
+        return employees;
     }
 }
